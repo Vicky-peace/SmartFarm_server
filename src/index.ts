@@ -6,6 +6,7 @@ import {logger} from 'hono/logger';
 import { errorHandler } from './middleware/error.middleware';
 
 import { authRouter } from './auth/auth.router';
+import {userRoutes} from './users/users.router';
 
 
 const app = new Hono();
@@ -23,6 +24,7 @@ app.onError(errorHandler);
 
 
 app.route('/', authRouter)
+app.route('/', userRoutes)
 
 serve({
     fetch: app.fetch,

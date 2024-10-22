@@ -17,7 +17,7 @@ export const registerSchema = z.object({
       /.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?].*/,
       "Password must contain at least one special character"
     ),
-  role: z.enum(["farmer", "buyer"]).default("farmer"),
+  role: z.enum(["farmer", "buyer", "admin"]).default("farmer"),
 });
 
 export const loginSchema = z.object({
@@ -27,3 +27,30 @@ export const loginSchema = z.object({
 
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
+
+
+
+
+//Validation schemas
+export const UserRole = z.enum(['farmer', 'buyer', 'admin']);
+
+// Schema to validate user updates
+export const updateUserSchema = z.object({
+  name: z.string().min(2).max(100).optional(),
+  email: z.string().email().optional(),
+  phoneNumber: z.string().regex(/^\+?[\d\s-]{8,20}$/).optional(),
+  password: z.string().min(8).optional(),
+  role: UserRole.optional(),
+  location: z.string().optional(),
+  farmSize: z.number().positive().optional(),
+  primaryCrops: z.string().optional(),
+  companyName: z.string().optional(),
+  businessType: z.string().optional(),
+}).refine((data) => {
+  if (data.role === 'farmer') {
+    return !!data.location; // Require location for farmers
+  } else if (data.role === 'buyer') {
+    return !!data.companyName && !!data.businessType; // Require companyName and businessType for buyers
+  }
+  return true;
+}, "Role-specific fields are required");
