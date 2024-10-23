@@ -165,6 +165,26 @@ export const userRoleRelations = relations(users, ({one}) =>({
 export const farmerListingsRelations = relations(farmers, ({ many }) => ({
     listings: many(listings),
   }));
+
+  //listing relationships
+  export const listingsRelations = relations(listings, ({ one }) => ({
+    farmer: one(farmers, {
+      fields: [listings.farmerId],
+      references: [farmers.id],
+    }),
+    product: one(products, {
+      fields: [listings.productId],
+      references: [products.id],
+    }),
+  }));
+
+  export const farmersRelations = relations(farmers, ({ many }) => ({
+    listings: many(listings),
+  }));
+  
+  export const productsRelations = relations(products, ({ many }) => ({
+    listings: many(listings),
+  }));
   
   //Buyers <-> Orders
   export const buyerOrdersRelations = relations(buyers, ({ many }) => ({

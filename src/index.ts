@@ -10,6 +10,7 @@ import {userRoutes} from './users/users.router';
 import { farmersRouter } from './farmers/farmers.router';
 import { buyerRouter } from './buyers/buyers.router';
 import { productRouter } from './products/products.router';
+import { listingRouter } from './listings/listings.routers';
 
 
 const app = new Hono();
@@ -31,6 +32,7 @@ app.route('/', userRoutes)
 app.route('/', farmersRouter)
 app.route('/', buyerRouter)
 app.route('/', productRouter)
+app.route('/', listingRouter)
 
 serve({
     fetch: app.fetch,

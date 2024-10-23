@@ -62,3 +62,13 @@ export const farmerSchema = z.object({
   farmSize: z.number().positive("Farm size must be a positive number"),
   primaryCrops: z.string().min(1, "Primary crops are required")
 })
+
+
+export const createListingSchema = z.object({
+  farmerId: z.number(),
+  productId: z.number(),
+  quantity: z.number().positive(),
+  price: z.number().positive(),
+  availableDate: z.string().transform(str => new Date(str)),
+  status: z.enum(['active', 'sold', 'expired']).default('active'),
+});
