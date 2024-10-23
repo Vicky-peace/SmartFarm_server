@@ -9,6 +9,7 @@ import { authRouter } from './auth/auth.router';
 import {userRoutes} from './users/users.router';
 import { farmersRouter } from './farmers/farmers.router';
 import { buyerRouter } from './buyers/buyers.router';
+import { productRouter } from './products/products.router';
 
 
 const app = new Hono();
@@ -29,6 +30,7 @@ app.route('/', authRouter)
 app.route('/', userRoutes)
 app.route('/', farmersRouter)
 app.route('/', buyerRouter)
+app.route('/', productRouter)
 
 serve({
     fetch: app.fetch,
