@@ -54,3 +54,11 @@ export const updateUserSchema = z.object({
   }
   return true;
 }, "Role-specific fields are required");
+
+
+
+export const farmerSchema = z.object({
+  location: z.string().min(1, "Location is required"),
+  farmSize: z.number().positive("Farm size must be a positive number"),
+  primaryCrops: z.string().min(1, "Primary crops are required")
+})

@@ -7,6 +7,7 @@ import { errorHandler } from './middleware/error.middleware';
 
 import { authRouter } from './auth/auth.router';
 import {userRoutes} from './users/users.router';
+import { farmersRouter } from './farmers/farmers.router';
 
 
 const app = new Hono();
@@ -25,6 +26,7 @@ app.onError(errorHandler);
 
 app.route('/', authRouter)
 app.route('/', userRoutes)
+app.route('/', farmersRouter)
 
 serve({
     fetch: app.fetch,
