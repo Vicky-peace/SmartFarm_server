@@ -72,3 +72,68 @@ export const createListingSchema = z.object({
   availableDate: z.string().transform(str => new Date(str)),
   status: z.enum(['active', 'sold', 'expired']).default('active'),
 });
+
+
+export type ListingStatus = 'active' | 'sold' | 'expired';
+export type OrderStatus = 'pending' | 'confirmed' | 'in_transit' | 'delivered' | 'cancelled';
+export type PaymentStatus = 'pending' | 'paid' | 'failed';
+
+// Listing types
+export interface Listing {
+  id: number;
+  farmerId: number;
+  productId: number;
+  quantity: string; // Decimal stored as string
+  price: string; // Decimal stored as string
+  availableDate: Date;
+  status: ListingStatus;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Order types
+export interface Order {
+  id: number;
+  buyerId: number;
+  listingId: number;
+  quantity: string; // Decimal stored as string
+  totalPrice: string; // Decimal stored as string
+  orderStatus: OrderStatus;
+  paymentStatus: PaymentStatus;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface CreateOrderInput {
+  buyerId: number;
+  listingId: number;
+  quantity: string;  // Decimal as string
+  totalPrice: string;  // Decimal as string
+}
+
+// Validation schema
+export const createOrderSchema = z.object({
+  buyerId: z.number().positive(),
+  listingId: z.number().positive(),
+  quantity: z.string().regex(/^\d+(\.\d{1,2})?$/), // Decimal validation
+  totalPrice: z.string().regex(/^\d+(\.\d{1,2})?$/) // Decimal validation
+});
+
+// Types with relations
+export interface OrderWithRelations extends Order {
+  buyer: {
+    id: number;
+    name: string;
+    email: string;
+  };
+  listing: Listing & {
+    farmer: {
+      id: number;
+      name: string;
+    };
+    product: {
+      id: number;
+      name: string;
+    };
+  };
+}

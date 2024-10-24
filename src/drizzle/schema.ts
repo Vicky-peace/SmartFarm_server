@@ -1,10 +1,10 @@
 import {pgTable,serial,varchar,text,integer,boolean,timestamp,decimal,pgEnum} from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { relations,sql } from 'drizzle-orm';
 //Enum definitions
 export const roleEnum = pgEnum("roleEnum", ["farmer", "buyer", "admin"]);
 export const listingStatusEnum = pgEnum("listingStatusEnum", ['active', 'sold', 'expired']);
 export const paymentStatusEnum = pgEnum('paymentStatusEnum', ['pending', 'paid', 'failed']);
-export const orderStatusEnum = pgEnum('orderStatusEnum', ['pending', 'confirmed', 'in_transit', 'delivered']);
+export const orderStatusEnum = pgEnum('orderStatusEnum', ['pending', 'confirmed', 'in_transit', 'delivered', 'cancelled']);
 export const paymentSettlementStatusEnum = pgEnum("paymentSettlementStatusEnum", ['pending', 'processed', 'failed']);
 export const logisticsStatusEnum = pgEnum("logisticsStatusEnum", ['scheduled', 'in_progress', 'completed']);
 export const marketDemandLevelEnum = pgEnum("marketDemandLevelEnum", ['low', 'medium', 'high']);
@@ -257,6 +257,9 @@ export const transactionMpesaRelations = relations(transactions, ({ one }) => ({
     }),
   }));
   
+
+
+
 
   export type TIUsers = typeof users.$inferInsert;
 export type TSUsers = typeof users.$inferSelect;

@@ -1,6 +1,5 @@
 import { Context } from "hono";
 import { listingService } from "./listings.services";
-import { createListingSchema } from "../validators/validator";
 
 export const listingController = {
   getAll: async (c: Context) => {

@@ -1,5 +1,5 @@
 {
-  "id": "1dc372d7-de97-4252-9d6b-fa4ba4006023",
+  "id": "557d6eb5-d621-42b1-aab8-4c7bef5aff11",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -1019,7 +1019,8 @@
         "pending",
         "confirmed",
         "in_transit",
-        "delivered"
+        "delivered",
+        "cancelled"
       ]
     },
     "public.paymentSettlementStatusEnum": {

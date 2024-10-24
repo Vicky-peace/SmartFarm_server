@@ -1,7 +1,7 @@
 CREATE TYPE "public"."listingStatusEnum" AS ENUM('active', 'sold', 'expired');--> statement-breakpoint
 CREATE TYPE "public"."logisticsStatusEnum" AS ENUM('scheduled', 'in_progress', 'completed');--> statement-breakpoint
 CREATE TYPE "public"."marketDemandLevelEnum" AS ENUM('low', 'medium', 'high');--> statement-breakpoint
-CREATE TYPE "public"."orderStatusEnum" AS ENUM('pending', 'confirmed', 'in_transit', 'delivered');--> statement-breakpoint
+CREATE TYPE "public"."orderStatusEnum" AS ENUM('pending', 'confirmed', 'in_transit', 'delivered', 'cancelled');--> statement-breakpoint
 CREATE TYPE "public"."paymentSettlementStatusEnum" AS ENUM('pending', 'processed', 'failed');--> statement-breakpoint
 CREATE TYPE "public"."paymentStatusEnum" AS ENUM('pending', 'paid', 'failed');--> statement-breakpoint
 CREATE TYPE "public"."roleEnum" AS ENUM('farmer', 'buyer', 'admin');--> statement-breakpoint
